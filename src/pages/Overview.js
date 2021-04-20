@@ -190,7 +190,9 @@ const Overview = () => {
       <OveriewContainer>
         <OverviewWrap>
           <OverviewCol1>
-            <OverviewH3>Overview</OverviewH3>
+            {/*
+              <OverviewH3>Overview</OverviewH3> 
+            */}
             <IAm>
               Hi there, I’m <Name>jeet</Name>
               <IoMdHand

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import * as AiIcons from "react-icons/ai";
-import * as DiIcons from "react-icons/si";
+import { AiFillGithub, AiOutlineTwitter, AiFillLinkedin } from "react-icons/ai";
+import {SiStackoverflow} from "react-icons/si";
 
 const SocialIconWrap = styled.div`
   margin-top: 40px;
@@ -10,6 +10,7 @@ const SocialIconWrap = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  z-index: 1;
   /* &:hover {
     cursor: pointer;
   } */
@@ -49,16 +50,16 @@ const SocialMedia = () => {
     <>
       <SocialIconWrap>
         <Github href="https://github.com/jv18creator/">
-          <AiIcons.AiFillGithub />
+          <AiFillGithub />
         </Github>
         <Twitter href="https://twitter.com/JeetViramgama">
-          <AiIcons.AiOutlineTwitter />
+          <AiOutlineTwitter />
         </Twitter>
         <Linkedin href="https://www.linkedin.com/in/jeet-viramgama-7292761a6/">
-          <AiIcons.AiFillLinkedin />
+          <AiFillLinkedin />
         </Linkedin>
         <Stackoverflow href="https://stackoverflow.com/users/13718296/jeet-viramgama?tab=profile">
-          <DiIcons.SiStackoverflow />
+          <SiStackoverflow />
         </Stackoverflow>
       </SocialIconWrap>
     </>
