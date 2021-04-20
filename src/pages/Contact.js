@@ -3,15 +3,23 @@ import styled from "styled-components";
 import { GoLocation } from "react-icons/go";
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail, AiOutlineSend } from "react-icons/ai";
-import * as AiIcons from "react-icons/ai";
-import * as DiIcons from "react-icons/si";
+import firebase from "firebase";
+import db from "../Helpers/firebase";
+import SocialMedia from "../Helpers/SocialMedia";
+import ReactGa from "react-ga";
+import BackText from "../Helpers/BackText";
 
 const ContactContainer = styled.div`
   margin: 60px auto 0 auto;
   max-width: 1440px;
   background-color: var(--bodyCol);
-  padding: 10px 40px;
-  position: relative;
+  padding: 10px 3rem;
+  @media (max-width: 768px) {
+    padding: 10px 2rem;
+  }
+  @media (max-width: 580px) {
+    padding: 10px 1.2rem;
+  }
 `;
 
 const ContactHead = styled.h1`
@@ -108,6 +116,8 @@ const Location = styled.a`
   flex-direction: column;
   align-items: center;
   padding: 10px 40px;
+  max-width: 200px;
+  text-align: center;
   color: #fff;
   text-decoration: none;
   border-radius: 8px;
@@ -139,6 +149,8 @@ const Phone = styled.a`
   text-decoration: none;
   margin: 30px 0;
   border-radius: 8px;
+  z-index: 3;
+  max-width: 200px;
   :hover {
     background: var(--strongOrange);
     transition: 0.3s ease;
@@ -156,6 +168,8 @@ const Message = styled.a`
   color: #fff;
   text-decoration: none;
   border-radius: 8px;
+  z-index: 3;
+  max-width: 200px;
   &:hover {
     background: var(--strongOrange);
     transition: 0.3s ease;
@@ -172,15 +186,7 @@ const Message = styled.a`
     }
   }
 `;
-const SocialIconWrap = styled.div`
-  margin-top: 40px;
-  font-size: 1.7rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  max-width: 350px;
-`;
+
 const Para = styled.p``;
 
 //grid
@@ -198,13 +204,31 @@ const GridContact = styled.div`
   }
 `;
 
-//firebase and other functions
-
-const SendFormDetails = (event) => {
-  event.preventDefault();
-};
 const Contact = () => {
+  //firebase and other functions
+
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const SendFormDetails = (event) => {
+    event.preventDefault();
+    db.collection("users").add({
+      userName: name,
+      userEmail: email,
+      usersMessage: message,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    setName("");
+    setEmail("");
+    setMessage("");
+    ReactGa.event({
+      category: 'User',
+      action: 'Sent message'
+    });
+  };
+
   return (
     <ContactContainer>
       <ContactHead>Let's Work Together</ContactHead>
@@ -214,7 +238,7 @@ const Contact = () => {
       </ContactSub>
       <GridContact>
         <ContactCol1>
-          <FormContainer action="#" onSubmit={SendFormDetails}>
+          <FormContainer action="#">
             <label htmlFor="name" className="lblName">
               Your Name
             </label>
@@ -222,11 +246,10 @@ const Contact = () => {
               type="text"
               id="name"
               placeholder="Jeet Viramgama"
-              // value={name}
-              // onChange={(e) => {
-              //   setName(e.target.value);
-              //   console.log(name)
-              // }}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
             <label htmlFor="email" className="lblEmail">
               Email
@@ -235,12 +258,23 @@ const Contact = () => {
               type="email"
               id="email"
               placeholder="jviramgama5@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="message" className="lblMessage">
               Message
             </label>
-            <textarea id="message" placeholder="Hi there..." />
-            <button type="submit" className="btnSubmit">
+            <textarea
+              id="message"
+              placeholder="Hi there..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="btnSubmit"
+              onClick={SendFormDetails}
+            >
               Send <AiOutlineSend className="sendIcon" />
             </button>
           </FormContainer>
@@ -248,14 +282,14 @@ const Contact = () => {
         <ContactCol2>
           <OtherContactOption>
             <Location
-              href="https://goo.gl/maps/8XaK3xVkt3DzrMMj9"
+              href="https://goo.gl/maps/bcZNEoARAbj9WMnP7"
               target="_blank"
             >
               <GoLocation
                 className="shrinkGrow"
                 style={{ fontSize: "2rem", marginBottom: "10px" }}
               />
-              <Para>102 Street 2714 Don</Para>
+              <Para>Mota Mava, Rajkot, Gujarat 360005</Para>
             </Location>
             <Phone href="tel:+919925171212" target="_blank">
               <BiPhone
@@ -271,15 +305,11 @@ const Contact = () => {
               />
               <Para>jviramgama5@gmail.com</Para>
             </Message>
-            <SocialIconWrap>
-              <AiIcons.AiFillGithub />
-              <AiIcons.AiOutlineTwitter />
-              <AiIcons.AiFillLinkedin />
-              <DiIcons.SiStackoverflow />
-            </SocialIconWrap>
+            <SocialMedia />
           </OtherContactOption>
         </ContactCol2>
       </GridContact>
+      <BackText backname="Contact" />
     </ContactContainer>
   );
 };

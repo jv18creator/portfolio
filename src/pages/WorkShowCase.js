@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Manage from '../assets/manage.PNG'
 // import DevBridge from ''
 
 const MainBox = styled.figure`
@@ -13,8 +12,7 @@ const MainBox = styled.figure`
     align-items: center;
     flex-direction: column;
     :hover {
-        /* transform: skew(4deg, 10deg); */
-        /* transform: scale(1.05) skew(4deg, 10deg); */
+        /* border: 4px solid var(--strongOrange); */
         transition: all .3s ease-in;
     }
 `;
@@ -33,16 +31,17 @@ const ProjectLink = styled.a`
 
 const ProjectName= styled.h3`
     font-size: 28px;
+    color: #fff;
 `
 
 
 const WorkShowCase = (props) => {
     return (
         <MainBox className='figure'>
-            <img src={Manage} style={{width: '100%'}} alt='manage'/>
+            <img src={props.imgSrc} style={{width: '100%'}} alt={props.imgAlt}/>
                 <figcaption>
                     <ProjectName>{props.projectname}</ProjectName>
-                    <p>{props.subname}</p>
+                    <p style={{color: '#fff'}}>{props.subname}</p>
                     <ProjectLink href={props.link} target='_blank' rel="noreferrer">{props.linkname}</ProjectLink>
                 </figcaption>
         </MainBox>

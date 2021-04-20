@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import * as DiIcons from "react-icons/si";
+import {FaBars} from "react-icons/fa";
+import {AiOutlineClose} from "react-icons/ai";
 import Submenu from "./Submenu";
 import { animateScroll as scroll } from "react-scroll";
 import Avatar from "../assets/avatar.svg";
+import SocialMedia from "../Helpers/SocialMedia";
 
 const NavHead = styled.div`
   background: var(--darkBlue);
   color: #fff;
-  /* height: 60px; */
-  /* margin-top: -60px; */
+  /* margin: 0; */
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
   align-items: center;
   position: fixed;
   width: 100%;
@@ -31,13 +31,14 @@ const NavName = styled(Link)`
 `;
 
 const NavIcon = styled(Link)`
-  margin-left: 2rem;
+  /* margin-right: 2rem; */
   font-size: 2rem;
   height: 60px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   color: #fff;
+  /* width: 100%; */
 `;
 
 const SidebarNav = styled.nav`
@@ -51,7 +52,7 @@ const SidebarNav = styled.nav`
   /* min-height: 100vh; */
   position: fixed;
   top: 0;
-  left: ${({ leftSidebar }) => (leftSidebar ? "0" : "-100%")};
+  right: ${({ leftSidebar }) => (leftSidebar ? "0" : "-100%")};
   transition: 300ms;
   z-index: 10;
   @media (max-width: 768px) {
@@ -67,17 +68,7 @@ const SidebarWrap = styled.div`
     height: 100%; */
 `;
 
-const SocialIconWrap = styled.div`
-  margin-top: 40px;
-  font-size: 1.7rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* &:hover {
-    cursor: pointer;
-  } */
-`;
+
 
 const AvatarWrapper = styled.div`
   width: 100%;
@@ -102,25 +93,25 @@ const AvatarTitle = styled.p`
   /* font-size: 16px; */
 `;
 
-const KeyboardEventWrap = styled.div`
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  bottom: 10px;
-  @media (max-width: 768px) {
-    display: none;
-    visibility: hidden;
-  }
-`;
-const KeyboardEventP = styled.p`
-  font-size: 14px;
-`;
-const KeyCode = styled.code`
-  padding: 5px 6px;
-  margin: 0 5px;
-  border-radius: 4px;
-  background-color: #252331;
-`;
+// const KeyboardEventWrap = styled.div`
+//   width: 100%;
+//   text-align: center;
+//   position: absolute;
+//   bottom: 10px;
+//   @media (max-width: 768px) {
+//     display: none;
+//     visibility: hidden;
+//   }
+// `;
+// const KeyboardEventP = styled.p`
+//   font-size: 14px;
+// `;
+// const KeyCode = styled.code`
+//   padding: 5px 6px;
+//   margin: 0 5px;
+//   border-radius: 4px;
+//   background-color: #252331;
+// `;
 //logic behid the sidebar is:
 // first I created a state called sidebar and set its value to false(0)
 //then I have a variable(leftSidebar) in component(SidebarNav)
@@ -143,7 +134,7 @@ const Sidebar = () => {
 
     const x = window.matchMedia("(max-width: 768px)");
     myFunction(x); // Call listener function at run time
-  //  x.addListener(myFunction);  Attach listener function on state changes
+    //  x.addListener(myFunction);  Attach listener function on state changes
   }, []);
 
   const showSidebar = (event) => {
@@ -152,13 +143,14 @@ const Sidebar = () => {
     setSidebar(!sidebar);
   };
 
-  document.addEventListener("keydown", (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    if (event.ctrlKey && event.key === "b") {
-      setSidebar(!sidebar);
-    }
-  });
+  //todo: it is causing some issues so for input fields build this functionality later
+  // document.addEventListener("keydown", (event) => {
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  //   if (event.ctrlKey && event.key === "b") {
+  //     setSidebar(!sidebar);
+  //   }
+  // });
 
   //top to home
   const toggleHome = () => {
@@ -169,15 +161,14 @@ const Sidebar = () => {
     <>
       <NavHead>
         <NavIcon to="#">
-          <FaIcons.FaBars onClick={showSidebar} />
+          <FaBars onClick={showSidebar} />
         </NavIcon>
-        <NavName to="#" onClick={toggleHome}>
-        </NavName>
+        <NavName to="#" onClick={toggleHome}></NavName>
       </NavHead>
       <SidebarNav leftSidebar={sidebar}>
         <SidebarWrap>
-          <NavIcon to="#">
-            <AiIcons.AiOutlineClose
+          <NavIcon to="#" style={{marginRight: '2rem'}}>
+            <AiOutlineClose
               style={{ padding: 0, display: "inline" }}
               onClick={showSidebar}
             />
@@ -192,20 +183,16 @@ const Sidebar = () => {
               <Submenu item={item} key={index} showSidebar={showSidebar} />
             );
           })}
+          <SocialMedia />
           {/* return <Submenu item={item} />  why works the same?*/}
-          <SocialIconWrap>
-            <AiIcons.AiFillGithub />
-            <AiIcons.AiOutlineTwitter />
-            <AiIcons.AiFillLinkedin />
-            <DiIcons.SiStackoverflow />
-          </SocialIconWrap>
-          <KeyboardEventWrap>
+
+          {/*          <KeyboardEventWrap>
             <KeyboardEventP>
               Hit
               <KeyCode>Ctrl + b</KeyCode>
               to toggle
             </KeyboardEventP>
-          </KeyboardEventWrap>
+</KeyboardEventWrap> */}
         </SidebarWrap>
       </SidebarNav>
     </>

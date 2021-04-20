@@ -1,9 +1,8 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import "./App.css";
-// import Sidebar from "./components/Sidebar";
+import ReactGa from "react-ga";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Overview from "./pages/Overview";
-// import Team from "./pages/Contact";
 import PageNotFound from "./pages/404";
 import styled from "styled-components";
 import LoadImg from "./assets/avatar.svg";
@@ -33,7 +32,14 @@ const LoadingWait = styled.img`
     }
   }
 `;
+
+
 function App() {
+  useEffect(() => {
+    ReactGa.initialize('G-NHW4EP16PN');
+    //to report page view
+    ReactGa.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
     <>
       <Suspense fallback={<LoadingWait src={LoadImg} />}>

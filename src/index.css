@@ -4,15 +4,7 @@
 
 body {
   margin: 0;
-  /* src: local("Clash Grotesk"), url("./assets/fonts/ClashGrotesk-Bold.otf"),
-    url("./assets/fonts/ClashGrotesk-Extralight.otf"),
-    url("./assets/fonts/ClashGrotesk-Light.otf"),
-    url("./assets/fonts/ClashGrotesk-Medium.otf"),
-    url("./assets/fonts/ClashGrotesk-Regular.otf"),
-    url("./assets/fonts/ClashGrotesk-Semibold.otf") format("otf");
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
-  font-weight: normal;
+  /* font-weight: normal; */
 }
 
 code {

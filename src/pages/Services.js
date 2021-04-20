@@ -17,6 +17,7 @@ import {
   SiVisualstudiocode,
   SiGithub,
 } from "react-icons/si";
+import BackText from "../Helpers/BackText";
 
 const ServiceContainer = styled.div`
   margin: 60px auto;
@@ -34,12 +35,13 @@ const AllServices = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-auto-rows: minmax(240px, 1fr);
   grid-gap: 4rem;
-  @media (max-width: 580px) {
-    /* grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); */
-  }
 `;
 
-const ServiceHead = styled.h2``;
+const ServiceHead = styled.h1`
+  @media (max-width: 580px) {
+    font-size: 26px;
+  }
+`;
 
 const TechIconsCol1 = styled.div`
   width: 50%;
@@ -53,7 +55,7 @@ const TechIconsCol1 = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   @media (max-width: 580px) {
-      flex-direction: column;
+    flex-direction: column;
   }
 `;
 
@@ -71,8 +73,8 @@ const TechIconsCol2 = styled.div`
   align-items: flex-end;
   margin: 0 40px;
   @media (max-width: 580px) {
-      flex-direction: column;
-      margin: 0 40px;
+    flex-direction: column;
+    margin: 0 40px;
   }
   /* flex-basis: auto; */
 `;
@@ -115,13 +117,13 @@ const Services = () => {
         <SiJavascript />
       </TechIconsCol1>
       <TechIconsCol2>
-      
         <SiReact />
         <SiBootstrap />
         <SiMaterialUi />
         <SiVisualstudiocode />
         <SiGithub />
       </TechIconsCol2>
+      <BackText backname='Services'/>
     </ServiceContainer>
   );
 };
