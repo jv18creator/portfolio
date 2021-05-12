@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import ServiceShowCase from "./ServiceShowCase";
 import Mobile from "../assets/mobile.svg";
+import ReactGA from "react-ga";
 import Desktop from "../assets/desktop.svg";
 import WebAudits from "../assets/web-audits.svg";
 import Designer from "../assets/web-design.svg";
@@ -18,13 +19,20 @@ import {
   SiGithub,
 } from "react-icons/si";
 import BackText from "../Helpers/BackText";
+import { firebaseAnalytics } from "../Helpers/firebaseConfig";
 
 const ServiceContainer = styled.div`
   margin: 60px auto;
   max-width: 1440px;
   background-color: var(--bodyCol);
-  padding: 10px 40px;
+  padding: 10px 3rem;
   position: relative;
+  @media (max-width: 768px) {
+    padding: 10px 2rem;
+  }
+  @media (max-width: 580px) {
+    padding: 10px 1.2rem;
+  }
 `;
 
 const AllServices = styled.div`
@@ -38,6 +46,8 @@ const AllServices = styled.div`
 `;
 
 const ServiceHead = styled.h1`
+  z-index: 3;
+  font-weight: 500;
   @media (max-width: 580px) {
     font-size: 26px;
   }
@@ -54,6 +64,7 @@ const TechIconsCol1 = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  z-index: 0;
   @media (max-width: 580px) {
     flex-direction: column;
   }
@@ -68,6 +79,7 @@ const TechIconsCol2 = styled.div`
   color: rgba(0, 0, 0, 0.2);
   font-size: 5rem;
   text-align: center;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -80,6 +92,12 @@ const TechIconsCol2 = styled.div`
 `;
 
 const Services = () => {
+  useEffect(() => {
+    firebaseAnalytics.logEvent("servicepage_visited");
+    ReactGA.initialize("G-NHW4EP16PN");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    console.log(window.location.pathname);
+  }, []);
   return (
     <ServiceContainer>
       <ServiceHead>What I do</ServiceHead>
@@ -123,7 +141,7 @@ const Services = () => {
         <SiVisualstudiocode />
         <SiGithub />
       </TechIconsCol2>
-      <BackText backname='Services'/>
+      <BackText backname="Services" />
     </ServiceContainer>
   );
 };
