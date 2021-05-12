@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { IoMdHand } from "react-icons/io";
 import { HiDownload } from "react-icons/hi";
-import { Link, NavLink } from "react-router-dom";
-import ReactGa from "react-ga";
+import { NavLink } from "react-router-dom";
+import ReactGA from "react-ga";
 import BackText from "../Helpers/BackText";
+import { firebaseAnalytics } from "../Helpers/firebaseConfig";
+import CV from "../assets/Resume-Jeet-Viramgama.pdf";
 
 const OveriewContainer = styled.div`
   margin-top: -30px;
@@ -50,7 +52,6 @@ const IAm = styled.h1`
 
 const Name = styled.span`
   margin-left: 8px;
-  /* letter-spacing: -4px; */
   animation: colChange 15s infinite alternate;
   animation-delay: 0;
   background: linear-gradient(92deg, #f35626, #feab3a);
@@ -82,11 +83,28 @@ const Mail = styled.a`
   }
 `;
 
+
 const SectionIntro = styled.div`
   font-size: 96px;
   font-weight: 400;
   font-family: "Oleo Script", cursive;
-  line-height: 1.1;
+  line-height: 1.2;
+  /* animation: tracking-in-contract-bck 1.4s cubic-bezier(0.215, 0.61, 0.355, 1)
+    forwards; */
+  @keyframes tracking-in-contract-bck {
+    0% {
+      letter-spacing: 0.3em;
+      transform: translateZ(400px);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateZ(0);
+      opacity: 1;
+    }
+  }
   span {
     position: relative;
     ::before {
@@ -95,9 +113,23 @@ const SectionIntro = styled.div`
       bottom: 20%;
       right: 0%;
       height: 8px;
-      width: 75%;
+      /* width: 0; */
       border-radius: 20px;
       background-color: var(--strongOrange);
+      animation: grow 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+      @keyframes grow {
+        0% {
+          width: 0;
+        }
+        40% {
+          opacity: 0.6;
+        }
+        100% {
+          width: 75%;
+          transform: translateZ(0);
+          opacity: 1;
+        }
+      }
       @media (max-width: 400px) {
         width: 350%;
         bottom: 10%;
@@ -154,7 +186,7 @@ const PortfolioLink = styled(NavLink)`
   }
 `;
 
-const DownloadCV = styled(Link)`
+const DownloadCV = styled.a`
   margin: 7px 20px;
   font-size: 20px;
   padding: 7px 0;
@@ -182,9 +214,20 @@ const DownloadCV = styled(Link)`
 const OverviewLinks = styled.div`
   margin-top: 50px;
 `;
+
+const Fun = styled.a`
+  color: var(--strongOrange);
+  margin: 0 4px;
+`;
 //All the functions goes here
 
 const Overview = () => {
+  useEffect(() => {
+    firebaseAnalytics.logEvent("homepage_visted");
+    ReactGA.initialize("G-NHW4EP16PN");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   return (
     <>
       <OveriewContainer>
@@ -195,21 +238,19 @@ const Overview = () => {
             */}
             <IAm>
               Hi there, I’m <Name>jeet</Name>
-              <IoMdHand
-                style={{
-                  marginLeft: "8px",
-                  color: "#F79924",
-                  transform: `rotate(-15deg)`,
-                }}
-              />
+              <IoMdHand className="hand" />
             </IAm>
             <SectionIntro>
               I make <span> websites</span>
             </SectionIntro>
             <SectionSub>
-              I’m an independent creative developer from Gujarat,India. I like
-              making fun interactive things with code. Feel free to take a look
-              at my latest projects here. Remotely available. UTC+05:30.
+              I’m an independent creative developer from Gujarat, India. I like
+              making
+              <Fun href="https://threeboxes.netlify.app/" target="_blank">
+                fun
+              </Fun>
+              interactive things with code. Feel free to take a look at my
+              latest projects here. Remotely available. UTC+05:30.
               <Mail href="mailto:jviramgama5@gmail.com">
                 jviramgama5@gmail.com
               </Mail>
@@ -219,10 +260,10 @@ const Overview = () => {
                 Portfolio<span></span>
               </PortfolioLink>
               <DownloadCV
-                to="/Resume-jeet-Viramgama.pdf"
-                download
+                href={CV}
+                download={true}
                 target="_blank"
-                onClick={ReactGa.event({
+                onClick={ReactGA.event({
                   category: "User",
                   action: "CV downloaded",
                 })}

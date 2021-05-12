@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import "./App.css";
-import ReactGa from "react-ga";
+import ReactGA from "react-ga";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Overview from "./pages/Overview";
 import PageNotFound from "./pages/404";
@@ -9,6 +9,8 @@ import LoadImg from "./assets/avatar.svg";
 import Services from "./pages/Services";
 import Work from "./pages/Work";
 import Contact from "./pages/Contact";
+import firebase from "firebase";
+import { firebaseAnalytics } from "./Helpers/firebaseConfig";
 // import { Loader } from 'react-loader-spinner';
 const Sidebar = lazy(() => import("./components/Sidebar"));
 
@@ -33,12 +35,15 @@ const LoadingWait = styled.img`
   }
 `;
 
+// firebase.initializeApp(firebaseApp);
 
 function App() {
   useEffect(() => {
-    ReactGa.initialize('G-NHW4EP16PN');
-    //to report page view
-    ReactGa.pageview(window.location.pathname + window.location.search);
+    firebaseAnalytics.logEvent('homepage_visited ')
+    ReactGA.initialize("G-NHW4EP16PN");
+    // ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    // console.log(window.location.pathname);
   }, []);
   return (
     <>

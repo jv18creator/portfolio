@@ -1,5 +1,5 @@
 {
-  "name": "sticky-sidebar",
+  "name": "portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,7 +24,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "webpack-dashboard -- webpack-dev-server --inline --port 8080",
+    "webdriver-update": "webdriver-manager update",
+    "dev": "nodemon server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GoLocation } from "react-icons/go";
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail, AiOutlineSend } from "react-icons/ai";
 import firebase from "firebase";
-import db from "../Helpers/firebase";
+import { db, firebaseAnalytics } from "../Helpers/firebaseConfig";
 import SocialMedia from "../Helpers/SocialMedia";
 import ReactGa from "react-ga";
 import BackText from "../Helpers/BackText";
+import ReactGA from "react-ga";
 
 const ContactContainer = styled.div`
   margin: 60px auto 0 auto;
@@ -224,10 +225,17 @@ const Contact = () => {
     setEmail("");
     setMessage("");
     ReactGa.event({
-      category: 'User',
-      action: 'Sent message'
+      category: "User",
+      action: "Sent message",
     });
   };
+
+  useEffect(() => {
+    firebaseAnalytics.logEvent("contactpage_visted");
+    ReactGA.initialize("G-NHW4EP16PN");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    console.log(window.location.pathname);
+  }, []);
 
   return (
     <ContactContainer>
