@@ -29,16 +29,16 @@ const OverviewWrap = styled.div`
 
 const OverviewCol1 = styled.div``;
 
-const OverviewH3 = styled.h3`
-  font-size: 20px;
-  display: inline-block;
-  /* border-bottom: 4px solid var(--strongOrange); */
-  margin-top: -10px;
-  font-weight: 400;
-  @media (max-width: 580px) {
-    font-size: 18px;
-  }
-`;
+// const OverviewH3 = styled.h3`
+//   font-size: 20px;
+//   display: inline-block;
+//   /* border-bottom: 4px solid var(--strongOrange); */
+//   margin-top: -10px;
+//   font-weight: 400;
+//   @media (max-width: 580px) {
+//     font-size: 18px;
+//   }
+// `;
 
 const IAm = styled.h1`
   display: flex;

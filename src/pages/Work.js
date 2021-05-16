@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { lazy, useEffect } from "react";
 import styled from "styled-components";
-import WorkShowCase from "./WorkShowCase";
 import Manage from "../assets/manage.jpg";
 import SunShine from "../assets/sunshine.jpg";
 import Dolla from "../assets/dolla.jpg";
 import PortfolioImg from "../assets/portfolio.jpg";
-import BackText from "../Helpers/BackText";
 import ReactGA from "react-ga";
 import { firebaseAnalytics } from "../Helpers/firebaseConfig";
+
+const BackText = lazy(() => import("../Helpers/BackText"));
+const WorkShowCase = lazy(() => import("./WorkShowCase"));
 
 const WorkContainer = styled.div`
   text-align: center;
@@ -55,7 +56,7 @@ const ProjectContainer = styled.div`
 
 const Work = () => {
   useEffect(() => {
-        firebaseAnalytics.logEvent("workpage_visited");
+    firebaseAnalytics.logEvent("workpage_visited");
     ReactGA.initialize("G-NHW4EP16PN");
     ReactGA.pageview(window.location.pathname + window.location.search);
     console.log(window.location.pathname);

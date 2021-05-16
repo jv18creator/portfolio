@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import {FaBars} from "react-icons/fa";
 import {AiOutlineClose} from "react-icons/ai";
-import Submenu from "./Submenu";
 import { animateScroll as scroll } from "react-scroll";
 import Avatar from "../assets/avatar.svg";
-import SocialMedia from "../Helpers/SocialMedia";
+
+// const Avatar = lazy(() => import("../assets/avatar.svg"));
+const Submenu = lazy(() => import("./Submenu"));
+const SocialMedia = lazy(() => import("../Helpers/SocialMedia"));
 
 const NavHead = styled.div`
   background: var(--darkBlue);
@@ -79,8 +81,8 @@ const AvatarWrapper = styled.div`
 `;
 
 const AvatarImg = styled.img`
-  width: 35%;
-  height: auto;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   background: no-repeat center;
   border-radius: 100%;
@@ -174,7 +176,7 @@ const Sidebar = () => {
             />
           </NavIcon>
           <AvatarWrapper>
-            <AvatarImg src={Avatar}></AvatarImg>
+            <AvatarImg src={Avatar} height='100' width='100' loading='lazy' />
             <AvatarName>Jeet Viramgama</AvatarName>
             <AvatarTitle>Front-end Developer</AvatarTitle>
           </AvatarWrapper>

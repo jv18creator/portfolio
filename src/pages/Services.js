@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy } from "react";
 import styled from "styled-components";
-import ServiceShowCase from "./ServiceShowCase";
 import Mobile from "../assets/mobile.svg";
 import ReactGA from "react-ga";
 import Desktop from "../assets/desktop.svg";
@@ -18,8 +17,10 @@ import {
   SiVisualstudiocode,
   SiGithub,
 } from "react-icons/si";
-import BackText from "../Helpers/BackText";
 import { firebaseAnalytics } from "../Helpers/firebaseConfig";
+
+const ServiceShowCase = lazy(() => import("./ServiceShowCase"));
+const BackText = lazy(() => import("../Helpers/BackText"));
 
 const ServiceContainer = styled.div`
   margin: 60px auto;

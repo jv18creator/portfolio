@@ -112,7 +112,13 @@ h4 {
 }
 
 p {
-  font-size: 14px;
+  font-size: 16px;
+  letter-spacing: 1.2px;
+}
+@media (max-width: 620px) {
+  p {
+    font-size: 14px;
+  }
 }
 
 /* @keyframes scale-in-ver-center {

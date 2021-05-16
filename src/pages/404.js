@@ -4,17 +4,14 @@ import styled from "styled-components";
 import Img from "../assets/error.svg";
 
 const ErrorContainer = styled.div`
-  background: #15171c;
   color: #fff;
-  height: calc(100vh - 60px);
-  max-height: calc(100vh - 60px);
+  margin-top: 80px;
 `;
 
 const ErrorWrapper = styled.div`
   max-width: 1100px;
   margin: 0 auto;
   text-align: center;
-
 `;
 
 const ErrorH1 = styled.h1`
@@ -46,7 +43,7 @@ const ErrorImgWrapper = styled.div`
 `;
 
 const ErrorImg = styled.img`
-  width: 100%;
+  width: 70%;
 `;
 
 const GoBackLink = styled(Link)`

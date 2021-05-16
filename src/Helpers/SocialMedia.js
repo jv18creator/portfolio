@@ -10,35 +10,31 @@ const SocialIconWrap = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  z-index: 1;
+  z-index: 4;
   /* &:hover {
     cursor: pointer;
   } */
 `;
 
 const Github = styled.a`
-  z-index: 10;
   color: #fff;
   :hover {
     color: var(--strongOrange);
   }
 `;
 const Twitter = styled.a`
-  z-index: 10;
   color: #fff;
   :hover {
     color: var(--strongOrange);
   }
 `;
 const Linkedin = styled.a`
-  z-index: 10;
   color: #fff;
   :hover {
     color: var(--strongOrange);
   }
 `;
 const Stackoverflow = styled.a`
-  z-index: 10;
   color: #fff;
   :hover {
     color: var(--strongOrange);

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import styled from "styled-components";
 import { GoLocation } from "react-icons/go";
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail, AiOutlineSend } from "react-icons/ai";
 import firebase from "firebase";
 import { db, firebaseAnalytics } from "../Helpers/firebaseConfig";
-import SocialMedia from "../Helpers/SocialMedia";
-import ReactGa from "react-ga";
+// import SocialMedia from "../Helpers/SocialMedia";
 import BackText from "../Helpers/BackText";
 import ReactGA from "react-ga";
+
+const SocialMedia = lazy(() => import("../Helpers/SocialMedia"));
 
 const ContactContainer = styled.div`
   margin: 60px auto 0 auto;
@@ -165,7 +166,7 @@ const Message = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 40px;
+  padding: 10px 30px;
   color: #fff;
   text-decoration: none;
   border-radius: 8px;
@@ -224,10 +225,6 @@ const Contact = () => {
     setName("");
     setEmail("");
     setMessage("");
-    ReactGa.event({
-      category: "User",
-      action: "Sent message",
-    });
   };
 
   useEffect(() => {
@@ -246,7 +243,7 @@ const Contact = () => {
       </ContactSub>
       <GridContact>
         <ContactCol1>
-          <FormContainer action="#">
+          <FormContainer action="#" autoComplete="off">
             <label htmlFor="name" className="lblName">
               Your Name
             </label>
