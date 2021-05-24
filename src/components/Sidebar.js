@@ -2,8 +2,8 @@ import React, { lazy, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
-import {FaBars} from "react-icons/fa";
-import {AiOutlineClose} from "react-icons/ai";
+import { FaBars } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai";
 import { animateScroll as scroll } from "react-scroll";
 import Avatar from "../assets/avatar.svg";
 
@@ -14,9 +14,7 @@ const SocialMedia = lazy(() => import("../Helpers/SocialMedia"));
 const NavHead = styled.div`
   background: var(--darkBlue);
   color: #fff;
-  /* margin: 0; */
   display: flex;
-  /* justify-content: space-between; */
   justify-content: flex-end;
   align-items: center;
   position: fixed;
@@ -33,14 +31,12 @@ const NavName = styled(Link)`
 `;
 
 const NavIcon = styled(Link)`
-  /* margin-right: 2rem; */
   font-size: 2rem;
   height: 60px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   color: #fff;
-  /* width: 100%; */
 `;
 
 const SidebarNav = styled.nav`
@@ -51,11 +47,10 @@ const SidebarNav = styled.nav`
   color: #fff;
   width: 250px;
   height: 100vh;
-  /* min-height: 100vh; */
   position: fixed;
   top: 0;
   right: ${({ leftSidebar }) => (leftSidebar ? "0" : "-100%")};
-  transition: 300ms;
+  transition-duration: 300ms;
   z-index: 10;
   @media (max-width: 768px) {
     width: 100%;
@@ -69,8 +64,6 @@ const SidebarWrap = styled.div`
     justify-content: space-between;
     height: 100%; */
 `;
-
-
 
 const AvatarWrapper = styled.div`
   width: 100%;
@@ -139,9 +132,7 @@ const Sidebar = () => {
     //  x.addListener(myFunction);  Attach listener function on state changes
   }, []);
 
-  const showSidebar = (event) => {
-    // event.stopPropagation();
-    // event.preventDefault();
+  const showSidebar = () => {
     setSidebar(!sidebar);
   };
 
@@ -169,14 +160,13 @@ const Sidebar = () => {
       </NavHead>
       <SidebarNav leftSidebar={sidebar}>
         <SidebarWrap>
-          <NavIcon to="#" style={{marginRight: '2rem'}}>
+          <NavIcon to="#" style={{ marginRight: "2rem" }}>
             <AiOutlineClose
-              style={{ padding: 0, display: "inline" }}
               onClick={showSidebar}
             />
           </NavIcon>
           <AvatarWrapper>
-            <AvatarImg src={Avatar} height='100' width='100' loading='lazy' />
+            <AvatarImg src={Avatar} height="100" width="100" loading="lazy" />
             <AvatarName>Jeet Viramgama</AvatarName>
             <AvatarTitle>Front-end Developer</AvatarTitle>
           </AvatarWrapper>
@@ -186,15 +176,6 @@ const Sidebar = () => {
             );
           })}
           <SocialMedia />
-          {/* return <Submenu item={item} />  why works the same?*/}
-
-          {/*          <KeyboardEventWrap>
-            <KeyboardEventP>
-              Hit
-              <KeyCode>Ctrl + b</KeyCode>
-              to toggle
-            </KeyboardEventP>
-</KeyboardEventWrap> */}
         </SidebarWrap>
       </SidebarNav>
     </>

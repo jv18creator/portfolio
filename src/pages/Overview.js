@@ -83,7 +83,6 @@ const Mail = styled.a`
   }
 `;
 
-
 const SectionIntro = styled.div`
   font-size: 96px;
   font-weight: 400;
@@ -233,9 +232,6 @@ const Overview = () => {
       <OveriewContainer>
         <OverviewWrap>
           <OverviewCol1>
-            {/*
-              <OverviewH3>Overview</OverviewH3> 
-            */}
             <IAm>
               Hi there, I’m <Name>jeet</Name>
               <IoMdHand className="hand" />
@@ -278,7 +274,6 @@ const Overview = () => {
              <HeroImg src={Hero} alt='image_illustrator'/> 
           </OverviewCol2>*/}
         </OverviewWrap>
-        {/*    <About>About</About>  */}
         <BackText backname="About" />
       </OveriewContainer>
     </>
