@@ -4,6 +4,7 @@ import Manage from "../assets/manage.jpg";
 import SunShine from "../assets/sunshine.jpg";
 import Dolla from "../assets/dolla.jpg";
 import PortfolioImg from "../assets/portfolio.jpg";
+import OtunbafawazmotorIcon from "../assets/commingsoon.png";
 import ReactGA from "react-ga";
 import { firebaseAnalytics } from "../Helpers/firebaseConfig";
 
@@ -79,6 +80,23 @@ const Work = () => {
             linkname="Visit"
             imgSrc={Manage}
             imgAlt="manage"
+          />
+          <WorkShowCase
+            link="https://www.otunbafawazmotor.com/"
+            imgSrc={OtunbafawazmotorIcon}
+            projectname="Otunbafawazmotor"
+            subname="Otunbafawazmotor is a comany that Buy Brand
+            New Cars, Foreign
+            Used Cars and
+            Locally used cars ,
+            We Inspect your
+            Car then give you
+            the valuation and
+            an offer of your
+            car with instant
+            payment."
+            linkname="Visit"
+            imgAlt="otunbafawazmotor"
           />
           <WorkShowCase
             projectname="SunShine"

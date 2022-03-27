@@ -41,7 +41,7 @@ const WorkShowCase = (props) => {
       <img
         src={props.imgSrc}
         style={{ width: "100%" }}
-        alt={props.imgAlt}
+        alt={"Under developemnt"}
         loading="lazy"
       />
       <figcaption>
